@@ -1,0 +1,9 @@
+﻿<Window x:Class="FirebaseAgent.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Agent" Height="250" Width="400">
+    <Grid Margin="10">
+        <TextBlock x:Name="StatusBlock" FontSize="14" Text="Agent ждёт команды..." />
+        <TextBox x:Name="LogBox" FontSize="12" Margin="0,30,0,0" Height="160" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" IsReadOnly="True"/>
+    </Grid>
+</Window>

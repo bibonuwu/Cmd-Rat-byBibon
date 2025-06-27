@@ -1,0 +1,83 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{92DAAB39-51BD-480B-B3CB-5374BE6E30EF}|FirebaseAdminPanel\\FirebaseAdminPanel.csproj|c:\\users\\bibon\\source\\repos\\firebaseadminpanel\\firebaseadminpanel\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{92DAAB39-51BD-480B-B3CB-5374BE6E30EF}|FirebaseAdminPanel\\FirebaseAdminPanel.csproj|solutionrelative:firebaseadminpanel\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D2B973C-2445-4174-BA49-52A6AD8C1709}|FirebaseAgent\\FirebaseAgent.csproj|C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\firebaseagent\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{4D2B973C-2445-4174-BA49-52A6AD8C1709}|FirebaseAgent\\FirebaseAgent.csproj|solutionrelative:firebaseagent\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{92DAAB39-51BD-480B-B3CB-5374BE6E30EF}|FirebaseAdminPanel\\FirebaseAdminPanel.csproj|C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\firebaseadminpanel\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{92DAAB39-51BD-480B-B3CB-5374BE6E30EF}|FirebaseAdminPanel\\FirebaseAdminPanel.csproj|solutionrelative:firebaseadminpanel\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D2B973C-2445-4174-BA49-52A6AD8C1709}|FirebaseAgent\\FirebaseAgent.csproj|C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\firebaseagent\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D2B973C-2445-4174-BA49-52A6AD8C1709}|FirebaseAgent\\FirebaseAgent.csproj|solutionrelative:firebaseagent\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\FirebaseAgent\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "FirebaseAgent\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\FirebaseAgent\\MainWindow.xaml.cs",
+              "RelativeToolTip": "FirebaseAgent\\MainWindow.xaml.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T15:27:59.859Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\FirebaseAdminPanel\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "FirebaseAdminPanel\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\FirebaseAdminPanel\\MainWindow.xaml",
+              "RelativeToolTip": "FirebaseAdminPanel\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-19T15:25:14.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\FirebaseAdminPanel\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "FirebaseAdminPanel\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\FirebaseAdminPanel\\MainWindow.xaml.cs",
+              "RelativeToolTip": "FirebaseAdminPanel\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T15:25:13.896Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\FirebaseAgent\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "FirebaseAgent\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\bibon\\source\\repos\\FirebaseAdminPanel\\FirebaseAgent\\MainWindow.xaml",
+              "RelativeToolTip": "FirebaseAgent\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-06-19T15:27:59.977Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
