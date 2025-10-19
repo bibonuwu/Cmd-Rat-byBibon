@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using SharedChat; // не забудь ссылку/using к файлам окна чата
 
 namespace FirebaseAdminPanel
 {
@@ -29,6 +30,23 @@ namespace FirebaseAdminPanel
             refreshTimer.Interval = TimeSpan.FromSeconds(10);
             refreshTimer.Tick += async (s, ev) => await RefreshMachinesList();
             refreshTimer.Start();
+        }
+        private async void BtnShutdown_Click(object sender, RoutedEventArgs e)
+        {
+            var machine = MachineComboBox.SelectedItem as string;
+            if (string.IsNullOrEmpty(machine))
+            {
+                MessageBox.Show("Выбери ПК!");
+                return;
+            }
+
+            if (MessageBox.Show("Точно выключить " + machine + "?", "Подтверждение",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
+                return;
+
+            // отправляем умную команду
+            await firebase.Child("machines").Child(machine).Child("cmd").PutAsync("shutdown");
+            ResultBlock.Text = "Команда выключения отправлена " + machine + ".";
         }
 
         private async Task RefreshMachinesList()
@@ -73,6 +91,56 @@ namespace FirebaseAdminPanel
                 MessageBox.Show("Ошибка при загрузке списка ПК: " + ex.Message);
             }
         }
+
+        private void BtnExplorer_Click(object sender, RoutedEventArgs e)
+        {
+            CommandBox.Text = "explorer";
+            SendCommand_Click(sender, e);
+        }
+
+        private void BtnNotepad_Click(object sender, RoutedEventArgs e)
+        {
+            CommandBox.Text = "notepad";
+            SendCommand_Click(sender, e);
+        }
+
+        private void BtnVCRedistDownload_Click(object sender, RoutedEventArgs e)
+        {
+            // Качаем напрямую агентом через HttpClient в %TEMP%
+            CommandBox.Text = "download https://aka.ms/vs/17/release/vc_redist.x64.exe %TEMP%\\vc_redist.x64.exe";
+            SendCommand_Click(sender, e);
+        }
+
+        private void BtnVCRedistInstall_Click(object sender, RoutedEventArgs e)
+        {
+            // Тихая установка
+            CommandBox.Text = "install %TEMP%\\vc_redist.x64.exe /install /quiet /norestart";
+            SendCommand_Click(sender, e);
+        }
+
+        // MainWindow.xaml.cs (FirebaseAdminPanel)
+        private async void BtnOpenChat_Click(object sender, RoutedEventArgs e)
+        {
+            var machine = MachineComboBox.SelectedItem as string;
+            if (string.IsNullOrEmpty(machine))
+            {
+                MessageBox.Show("Выбери ПК для чата.");
+                return;
+            }
+
+            // 1) Откроем чат локально (у админа)
+            var chat = new ChatWindow(firebase, machine, "admin");
+            chat.Show();
+
+            // 2) Попросим агент открыть то же окно чата
+            await firebase.Child("machines").Child(machine).Child("cmd")
+                .PutAsync<string>($"open_chat {machine}");
+
+            ResultBlock.Text = $"Чат room='{machine}' открыт у тебя и на {machine}.";
+        }
+
+
+
 
         private async void SendCommand_Click(object sender, RoutedEventArgs e)
         {

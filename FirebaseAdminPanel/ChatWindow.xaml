@@ -1,0 +1,193 @@
+﻿<Window x:Class="SharedChat.ChatWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SharedChat"
+        Title="Chat" Height="560" Width="460"
+        WindowStartupLocation="CenterScreen"
+        Background="#0F0F10" FontFamily="Segoe UI"
+        SnapsToDevicePixels="True" UseLayoutRounding="True">
+
+    <!-- ===== THEME / RESOURCES ===== -->
+    <Window.Resources>
+        <Color x:Key="AccentColor">#7C5CFF</Color>
+        <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentColor}"/>
+        <SolidColorBrush x:Key="BG1" Color="#17171A"/>
+        <SolidColorBrush x:Key="Stroke" Color="#26262A"/>
+        <SolidColorBrush x:Key="Text" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextDim" Color="#B8B8C2"/>
+
+        <!-- Карточка -->
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource BG1}"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Stroke}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="16" ShadowDepth="0" Opacity="0.25" Color="#000000"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Кнопка -->
+        <Style x:Key="BtnPrimary" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="{StaticResource Accent}"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Stroke}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd" CornerRadius="12"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#9C83FF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#5E46CC"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- TextBox с watermark через Tag -->
+        <Style x:Key="WatermarkTextBox" TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource Text}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="#1D1D21"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Stroke}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Border x:Name="bd" CornerRadius="12"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="8,6,8,6"/>
+                            <TextBlock x:Name="wm"
+                                       Text="{TemplateBinding Tag}"
+                                       Foreground="{StaticResource TextDim}"
+                                       Margin="14,0,14,0"
+                                       IsHitTestVisible="False"
+                                       VerticalAlignment="Center"
+                                       Visibility="Collapsed"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource Accent}"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="wm" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Шаблоны пузырьков -->
+        <DataTemplate x:Key="MessageLeftTemplate">
+            <Grid Margin="0,6">
+                <Border MaxWidth="340" Padding="10" CornerRadius="12"
+                        Background="#24242A" BorderBrush="#313139" BorderThickness="1"
+                        HorizontalAlignment="Left">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Header}" Foreground="{StaticResource TextDim}" FontSize="12"/>
+                        <TextBlock Text="{Binding Body}" Foreground="{StaticResource Text}" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MessageRightTemplate">
+            <Grid Margin="0,6">
+                <Border MaxWidth="340" Padding="10" CornerRadius="12"
+                        Background="{StaticResource Accent}" BorderThickness="0"
+                        HorizontalAlignment="Right">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Header}" Foreground="#F5F1FF" Opacity="0.9" FontSize="12"/>
+                        <TextBlock Text="{Binding Body}" Foreground="White" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <!-- Публичный селектор -->
+        <local:BubbleTemplateSelector x:Key="BubbleSelector"
+                                      LeftTemplate="{StaticResource MessageLeftTemplate}"
+                                      RightTemplate="{StaticResource MessageRightTemplate}"/>
+    </Window.Resources>
+
+    <!-- ===== LAYOUT ===== -->
+    <Grid Margin="14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Style="{StaticResource Card}" Grid.Row="0" Padding="10">
+            <DockPanel LastChildFill="True">
+                <TextBlock Text="Chat" FontSize="18" Foreground="{StaticResource Text}" FontWeight="SemiBold"/>
+                <TextBlock DockPanel.Dock="Right" Text="Online" Foreground="{StaticResource TextDim}" VerticalAlignment="Center"/>
+            </DockPanel>
+        </Border>
+
+        <!-- Messages -->
+        <Border Style="{StaticResource Card}" Grid.Row="1" Padding="0" Margin="0,10,0,10">
+            <ScrollViewer x:Name="Scroll" VerticalScrollBarVisibility="Auto" Padding="12">
+                <ItemsControl x:Name="MessagesList"
+                              ItemTemplateSelector="{StaticResource BubbleSelector}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Input -->
+        <Border Style="{StaticResource Card}" Grid.Row="2" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="InputBox"
+                         Grid.Column="0"
+                         Style="{StaticResource WatermarkTextBox}"
+                         Tag="Напишите сообщение… (Enter — отправить, Shift+Enter — новая строка)"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         MinHeight="44" />
+
+                <Button Grid.Column="1" Style="{StaticResource BtnPrimary}" Margin="10,0,0,0" MinWidth="88"
+                        Click="Send_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Margin="0,0,6,0"/>
+                        <TextBlock Text="Send"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
